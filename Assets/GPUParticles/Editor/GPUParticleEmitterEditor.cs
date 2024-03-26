@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GPUParticles
 {
@@ -22,10 +23,16 @@ namespace GPUParticles
         {
             instance = this;
 
-            if (logo == null)
+            foreach(var i in Directory.EnumerateDirectories(".", "GPU Particle", SearchOption.AllDirectories))
             {
-                logo = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/GPUParticles/Resources/Logo.png");
+                string p = Path.Combine(i, "Logo.png");
+                if (File.Exists(p))
+                {
+                    logo = AssetDatabase.LoadAssetAtPath<Texture2D>(Path.GetRelativePath(Directory.GetCurrentDirectory(), p));
+                    break;
+                }
             }
+            
 
             modules = new List<Module>
         {

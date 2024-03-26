@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace GPUParticles
 {
+    [AddComponentMenu("Ellyality/Visual/GPU Particle/Particle Emitter")]
     public class GPUParticleEmitter : MonoBehaviour
     {
         public const string VERSION = "2212";
@@ -133,7 +134,7 @@ namespace GPUParticles
 
             renderMaterial.SetPass(0);
 
-            Graphics.DrawProcedural(MeshTopology.Quads, 6, dead.count);
+            Graphics.DrawProceduralNow(MeshTopology.Quads, 6, dead.count);
         }
 
         private void OnDestroy()
